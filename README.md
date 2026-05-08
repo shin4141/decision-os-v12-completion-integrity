@@ -53,6 +53,29 @@ The artifact focuses on whether a future self can:
 
 ---
 
+## Quick Start
+
+Clone the repository:
+
+```bash
+git clone https://github.com/shin4141/decision-os-v12-completion-integrity.git
+cd decision-os-v12-completion-integrity
+
+Run the lightweight validator:
+
+python tools/validate_completion_record.py examples/pass_example.json
+python tools/validate_completion_record.py examples/delay_example.json
+python tools/validate_completion_record.py examples/block_example.json
+
+Expected behavior:
+
+pass_example.json should infer PASS.
+delay_example.json may warn if a required field is incomplete.
+block_example.json should infer BLOCK because critical control handles are missing.
+
+This validator does not prove correctness.
+It only checks whether the record contains the minimum control handles for future-restartable closure.
+
 ## Minimal Completion Record
 
 A minimal record may include fields such as:
