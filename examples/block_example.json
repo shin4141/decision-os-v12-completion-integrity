@@ -1,0 +1,33 @@
+{
+  "as_of": "2026-05-08T00:00:00Z",
+  "objective": "Close a rewritten handoff after compressing prior context.",
+  "what_changed": [
+    "Compressed a long handoff into a short summary.",
+    "Marked the work as complete."
+  ],
+  "unresolved": [
+    "Unknowns were removed from the handoff.",
+    "The original evidence path is no longer available.",
+    "The next self cannot verify whether the summary preserves the original Canon."
+  ],
+  "must_preserve": [
+    "Completion Integrity",
+    "False Completion",
+    "Evidence Anchor",
+    "Stop Condition",
+    "Next self should not"
+  ],
+  "evidence_anchor": [],
+  "restart_point": "",
+  "stop_condition": [],
+  "reanchor_condition": [
+    "Re-anchor if the original handoff or evidence source cannot be recovered."
+  ],
+  "next_self_should_not": [
+    "Do not close this update as PASS.",
+    "Do not continue from the compressed summary without recovering the evidence path.",
+    "Do not treat a fluent summary as a valid control handoff."
+  ],
+  "gate_output": "BLOCK",
+  "notes": "This is a BLOCK example because closure would actively create False Completion: evidence is missing, the restart point is empty, and no Stop Condition is available."
+}
