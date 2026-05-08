@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shin4141/decision-os-v12-completion-integrity/completion_record.schema.json",
+  "title": "Decision-OS V12 Minimal Completion Record",
+  "description": "A minimal structured record for future-restartable closure under Decision-OS V12: Completion Integrity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "as_of",
+    "objective",
+    "what_changed",
+    "unresolved",
+    "must_preserve",
+    "evidence_anchor",
+    "restart_point",
+    "stop_condition",
+    "reanchor_condition",
+    "next_self_should_not",
+    "gate_output"
+  ],
+  "properties": {
+    "as_of": {
+      "type": "string",
+      "description": "Timestamp or As-of marker for when the update was closed, including relevant assumptions, constraints, or capability ceiling when possible."
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The objective of this update cycle."
+    },
+    "what_changed": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Explicit delta from the prior state."
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Open items, Unknowns, unverified Assumptions, or incomplete structures."
+    },
+    "must_preserve": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Canon, KEEP constraints, definitions, or structures that must not be overwritten or smoothed away."
+    },
+    "evidence_anchor": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Source, log, file, hash, commit, version, URL, or reference that allows future reconnection."
+    },
+    "restart_point": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Where the future self should resume."
+    },
+    "stop_condition": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Conditions that should trigger DELAY or BLOCK instead of continued closure."
+    },
+    "reanchor_condition": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Conditions under which the update must be re-anchored because the basis has shifted."
+    },
+    "next_self_should_not": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Prohibitions for the future self; what must not be done during continuation."
+    },
+    "gate_output": {
+      "type": "string",
+      "enum": ["PASS", "DELAY", "BLOCK"],
+      "description": "Completion Gate output. PASS is not a truth guarantee; it only means the record appears future-restartable under the declared scope."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional implementation or reviewer notes."
+    }
+  }
+}
