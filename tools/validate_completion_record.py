@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""
+Lightweight validator for Decision-OS V12 Minimal Completion Records.
+
+This tool does not prove correctness.
+It only checks whether a record has the minimum control handles required
+for future-restartable closure.
+
+Usage:
+  python tools/validate_completion_record.py examples/pass_example.json
+  python tools/validate_completion_record.py examples/delay_example.json
+  python tools/validate_completion_record.py examples/block_example.json
+"""
+
+import json
+import sys
+from pathlib import Path
+
+
+REQUIRED_FIELDS = [
+    "as_of",
+    "objective",
+    "what_changed",
+    "unresolved",
+    "must_preserve",
+    "evidence_anchor",
+    "restart_point",
+    "stop_condition",
+    "reanchor_condition",
+    "next_self_should_not",
+    "gate_output",
+]
+
+CRITICAL_FIELDS = [
+    "evidence_anchor",
+    "restart_point",
+    "stop_condition",
+    "reanchor_condition",
+    "next_self_should_not",
+]
+
+VALID_GATE_OUTPUTS = {"PASS", "DELAY", "BLOCK"}
+
+
+def is_empty(value):
+    """Return True if a field is structurally empty."""
+    if value is None:
+        return True
+    if isinstance(value, str):
+        return value.strip() == ""
+    if isinstance(value, list):
+        return len(value) == 0 or all(is_empty(item) for item in value)
+    if isinstance(value, dict):
+        return len(value) == 0
+    return False
+
+
+def load_json(path):
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        raise SystemExit(f"ERROR: file not found: {path}")
+    except json.JSONDecodeError as e:
+        raise SystemExit(f"ERROR: invalid JSON: {e}")
+
+
+def validate(record):
+    errors = []
+    warnings = []
+
+    for field in REQUIRED_FIELDS:
+        if field not in record:
+            errors.append(f"missing required field: {field}")
+
+    gate_output = record.get("gate_output")
+    if gate_output not in VALID_GATE_OUTPUTS:
+        errors.append(
+            f"gate_output must be one of {sorted(VALID_GATE_OUTPUTS)}, got: {gate_output}"
+        )
+
+    empty_required = [
+        field for field in REQUIRED_FIELDS
+        if field in record and is_empty(record[field])
+    ]
+
+    empty_critical = [
+        field for field in CRITICAL_FIELDS
+        if field in record and is_empty(record[field])
+    ]
+
+    if empty_required:
+        warnings.append(
+            "empty required fields detected: " + ", ".join(empty_required)
+        )
+
+    if empty_critical:
+        warnings.append(
+            "empty critical fields detected: " + ", ".join(empty_critical)
+        )
+
+    expected = infer_gate_output(record, empty_required, empty_critical)
+
+    if gate_output != expected:
+        warnings.append(
+            f"declared gate_output is {gate_output}, but lightweight inference suggests {expected}"
+        )
+
+    return errors, warnings, expected
+
+
+def infer_gate_output(record, empty_required, empty_critical):
+    """
+    Minimal non-weighted inference.
+
+    PASS:
+      all required control handles are present.
+
+    DELAY:
+      the record is usable but incomplete.
+
+    BLOCK:
+      closure would actively create False Completion:
+      critical control handles are missing.
+    """
+    if empty_critical:
+        return "BLOCK"
+
+    if empty_required:
+        return "DELAY"
+
+    return "PASS"
+
+
+def main():
+    if len(sys.argv) != 2:
+        raise SystemExit(
+            "Usage: python tools/validate_completion_record.py <record.json>"
+        )
+
+    path = Path(sys.argv[1])
+    record = load_json(path)
+
+    errors, warnings, expected = validate(record)
+
+    print(f"File: {path}")
+    print(f"Declared gate_output: {record.get('gate_output')}")
+    print(f"Lightweight inferred output: {expected}")
+
+    if errors:
+        print("\nERRORS:")
+        for error in errors:
+            print(f"- {error}")
+
+    if warnings:
+        print("\nWARNINGS:")
+        for warning in warnings:
+            print(f"- {warning}")
+
+    if not errors and not warnings:
+        print("\nResult: valid minimal completion record.")
+
+    if errors:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
