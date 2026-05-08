@@ -1,0 +1,31 @@
+{
+  "as_of": "2026-05-08T00:00:00Z",
+  "objective": "Close a draft update after adding a new section.",
+  "what_changed": [
+    "Added a new section explaining Completion Integrity."
+  ],
+  "unresolved": [
+    "Evidence Anchor has not been fixed.",
+    "Stop Condition is still vague.",
+    "The relation to CI/CD needs review."
+  ],
+  "must_preserve": [
+    "Completion Integrity",
+    "False Completion",
+    "Future Restartability"
+  ],
+  "evidence_anchor": [],
+  "restart_point": "Review the new section and decide whether it can be closed.",
+  "stop_condition": [
+    "Stop if the missing Evidence Anchor cannot be recovered."
+  ],
+  "reanchor_condition": [
+    "Re-anchor if the paper structure changes."
+  ],
+  "next_self_should_not": [
+    "Do not mark the section complete until the Evidence Anchor is attached.",
+    "Do not treat unresolved CI/CD comparison as already solved."
+  ],
+  "gate_output": "DELAY",
+  "notes": "This is a DELAY example because the record has useful structure, but the Evidence Anchor is missing. It should not be closed as PASS yet."
+}
