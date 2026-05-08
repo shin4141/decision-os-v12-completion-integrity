@@ -1,0 +1,43 @@
+{
+  "as_of": "2026-05-08T00:00:00Z",
+  "objective": "Close the V12 Completion Gate section in a future-restartable form.",
+  "what_changed": [
+    "Added Completion Gate definition.",
+    "Added PASS/DELAY/BLOCK boundary rule.",
+    "Added Minimal Completion Record structure."
+  ],
+  "unresolved": [
+    "Empirical validation remains future work.",
+    "Weighted scoring is not defined in this minimal artifact."
+  ],
+  "must_preserve": [
+    "Completion Integrity is not a truth guarantee.",
+    "PASS means future-restartable closure, not proven correctness.",
+    "Unknowns and Assumptions must remain visible.",
+    "Next self should not is required as a prohibition field."
+  ],
+  "evidence_anchor": [
+    "README.md",
+    "completion_record.schema.json",
+    "Decision-OS V12 draft PDF",
+    "GitHub companion artifact repository"
+  ],
+  "restart_point": "Continue from the Minimal Completion Record and validate whether the record remains usable by a future self.",
+  "stop_condition": [
+    "Stop if Evidence Anchor is missing.",
+    "Stop if Unknowns are converted into facts.",
+    "Stop if PASS is treated as a truth guarantee."
+  ],
+  "reanchor_condition": [
+    "Re-anchor if the V12 paper definition changes.",
+    "Re-anchor if the schema fields are changed.",
+    "Re-anchor if weighted scoring is introduced in a later version."
+  ],
+  "next_self_should_not": [
+    "Do not treat this PASS example as proof that the update is correct.",
+    "Do not remove unresolved items merely to make the record cleaner.",
+    "Do not convert this minimal artifact into a full self-evolving AI implementation."
+  ],
+  "gate_output": "PASS",
+  "notes": "This is a PASS example because all required control handles are present. It does not prove correctness."
+}
