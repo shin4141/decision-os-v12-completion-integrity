@@ -1,3 +1,5 @@
+![Validate Completion Records](https://github.com/shin4141/decision-os-v12-completion-integrity/actions/workflows/validate.yml/badge.svg)
+
 # Decision-OS V12: Completion Integrity
 
 Minimal companion artifact for **Decision-OS V12: Completion Integrity**.
