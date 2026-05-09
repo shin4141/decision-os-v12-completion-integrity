@@ -10,6 +10,7 @@ Usage:
   python tools/validate_completion_record.py examples/pass_example.json
   python tools/validate_completion_record.py examples/delay_example.json
   python tools/validate_completion_record.py examples/block_example.json
+  python tools/validate_completion_record.py examples/conditional_pass_example.json
 """
 
 import json
@@ -28,18 +29,19 @@ REQUIRED_FIELDS = [
     "stop_condition",
     "reanchor_condition",
     "next_self_should_not",
+    "scope_profile",
     "gate_output",
 ]
 
 CRITICAL_FIELDS = [
     "evidence_anchor",
-    "restart_point",
     "stop_condition",
-    "reanchor_condition",
     "next_self_should_not",
 ]
 
 VALID_GATE_OUTPUTS = {"PASS", "DELAY", "BLOCK"}
+VALID_SCOPE_PROFILES = {"temporary", "reusable", "shared", "irreversible"}
+VALID_GATE_SUBTYPES = {"none", "conditional_pass"}
 
 
 def is_empty(value):
@@ -79,6 +81,21 @@ def validate(record):
             f"gate_output must be one of {sorted(VALID_GATE_OUTPUTS)}, got: {gate_output}"
         )
 
+    scope_profile = record.get("scope_profile")
+    if scope_profile not in VALID_SCOPE_PROFILES:
+        errors.append(
+            f"scope_profile must be one of {sorted(VALID_SCOPE_PROFILES)}, got: {scope_profile}"
+        )
+
+    gate_subtype = record.get("gate_subtype")
+    if gate_subtype is not None and gate_subtype not in VALID_GATE_SUBTYPES:
+        errors.append(
+            f"gate_subtype must be one of {sorted(VALID_GATE_SUBTYPES)}, got: {gate_subtype}"
+        )
+
+    if gate_subtype == "conditional_pass" and gate_output != "PASS":
+        errors.append("gate_subtype conditional_pass is only valid under gate_output PASS")
+
     empty_required = [
         field for field in REQUIRED_FIELDS
         if field in record and is_empty(record[field])
@@ -117,14 +134,25 @@ def infer_gate_output(record, empty_required, empty_critical):
       all required control handles are present.
 
     DELAY:
-      the record is usable but incomplete.
+      the record is usable but incomplete, or a reusable/shared profile
+      is missing a critical control handle.
 
     BLOCK:
       closure would actively create False Completion:
-      critical control handles are missing.
+      an irreversible profile is missing a critical control handle.
     """
+    scope_profile = record.get("scope_profile")
+    empty_noncritical_required = [
+        field for field in empty_required
+        if field not in CRITICAL_FIELDS
+    ]
+
     if empty_critical:
-        return "BLOCK"
+        if scope_profile == "temporary":
+            return "PASS" if not empty_noncritical_required else "DELAY"
+        if scope_profile == "irreversible":
+            return "BLOCK"
+        return "DELAY"
 
     if empty_required:
         return "DELAY"

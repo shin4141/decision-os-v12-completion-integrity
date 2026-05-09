@@ -38,6 +38,8 @@
     "Do not remove unresolved items merely to make the record cleaner.",
     "Do not convert this minimal artifact into a full self-evolving AI implementation."
   ],
+  "scope_profile": "reusable",
   "gate_output": "PASS",
+  "gate_subtype": "none",
   "notes": "This is a PASS example because all required control handles are present. It does not prove correctness."
 }

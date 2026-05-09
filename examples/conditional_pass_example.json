@@ -1,0 +1,48 @@
+{
+  "as_of": "2026-05-09T00:00:00Z",
+  "objective": "Close a narrow documentation update while preserving a clear recheck condition.",
+  "what_changed": [
+    "Added a short clarification to the companion artifact documentation.",
+    "Recorded the condition under which the closure remains usable."
+  ],
+  "unresolved": [
+    "The clarification has not been tested against every downstream reuse context.",
+    "This record is not proof that the clarification is true in all settings."
+  ],
+  "must_preserve": [
+    "PASS is not a truth guarantee.",
+    "Conditional PASS remains a subtype under PASS, not a fourth gate output.",
+    "Future restartability depends on the stated validity condition."
+  ],
+  "evidence_anchor": [
+    "README.md",
+    "docs/scope_profiles.md",
+    "completion_record.schema.json"
+  ],
+  "restart_point": "Recheck whether the stated validity condition still holds before reusing this closure.",
+  "stop_condition": [
+    "Stop if the documented scope no longer matches the actual use context.",
+    "Stop if the conditional PASS subtype is treated as proof of truth.",
+    "Stop if gate_output is expanded beyond PASS, DELAY, and BLOCK."
+  ],
+  "reanchor_condition": [
+    "Re-anchor if scope profiles are redefined.",
+    "Re-anchor if the record is reused outside the declared valid_while condition."
+  ],
+  "next_self_should_not": [
+    "Do not treat this conditional PASS as a universal approval.",
+    "Do not convert conditional_pass into a fourth gate_output.",
+    "Do not remove the validity condition to make the record look stronger."
+  ],
+  "scope_profile": "temporary",
+  "gate_output": "PASS",
+  "gate_subtype": "conditional_pass",
+  "valid_while": "The documentation change remains limited to the stated companion artifact scope and is not used as proof of truth.",
+  "recheck_by": "Before reusing this record for a broader or higher-risk workflow.",
+  "responsibility_boundary": {
+    "decision_owner": "Repository maintainer",
+    "review_workflow": "human_reviewed",
+    "responsibility_note": "The workflow owner remains responsible for choosing and deploying this conditional PASS."
+  },
+  "notes": "This is a conditional PASS example under gate_output PASS. It is not proof of truth; it only records a future-restartable closure with an explicit validity condition."
+}

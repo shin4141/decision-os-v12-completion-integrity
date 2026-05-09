@@ -26,6 +26,8 @@
     "Do not mark the section complete until the Evidence Anchor is attached.",
     "Do not treat unresolved CI/CD comparison as already solved."
   ],
+  "scope_profile": "reusable",
   "gate_output": "DELAY",
+  "gate_subtype": "none",
   "notes": "This is a DELAY example because the record has useful structure, but the Evidence Anchor is missing. It should not be closed as PASS yet."
 }

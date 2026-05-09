@@ -28,6 +28,8 @@
     "Do not continue from the compressed summary without recovering the evidence path.",
     "Do not treat a fluent summary as a valid control handoff."
   ],
+  "scope_profile": "irreversible",
   "gate_output": "BLOCK",
+  "gate_subtype": "none",
   "notes": "This is a BLOCK example because closure would actively create False Completion: evidence is missing, the restart point is empty, and no Stop Condition is available."
 }

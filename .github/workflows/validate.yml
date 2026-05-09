@@ -28,3 +28,6 @@ jobs:
 
       - name: Validate BLOCK example
         run: python tools/validate_completion_record.py examples/block_example.json
+
+      - name: Validate conditional PASS example
+        run: python tools/validate_completion_record.py examples/conditional_pass_example.json

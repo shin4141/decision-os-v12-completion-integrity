@@ -47,8 +47,17 @@ The artifact focuses on whether a future self can:
 - `examples/block_example.json`  
   Example of a record that should be treated as `BLOCK`.
 
+- `examples/conditional_pass_example.json`
+  Example of a conditional PASS subtype under `PASS`.
+
 - `checklist/completion_gate.md`  
   A human-readable checklist version of the Completion Gate.
+
+- `docs/scope_profiles.md`
+  Short definitions for temporary, reusable, shared, and irreversible scope profiles.
+
+- `docs/responsibility_boundary.md`
+  Short clarification of responsibility ownership around workflow choice.
 
 - `tools/validate_completion_record.py`  
   A lightweight validator for structure-level checking.
@@ -70,13 +79,15 @@ Run the lightweight validator:
 python tools/validate_completion_record.py examples/pass_example.json
 python tools/validate_completion_record.py examples/delay_example.json
 python tools/validate_completion_record.py examples/block_example.json
+python tools/validate_completion_record.py examples/conditional_pass_example.json
 ```
 
 Expected behavior:
 
-- `pass_example.json` should infer `PASS`.
-- `delay_example.json` may warn if a required field is incomplete.
-- `block_example.json` should infer `BLOCK` because critical control handles are missing.
+- `examples/pass_example.json` should infer `PASS`.
+- `examples/delay_example.json` may warn if a required field is incomplete.
+- `examples/block_example.json` should infer `BLOCK` because critical control handles are missing.
+- `examples/conditional_pass_example.json` should infer `PASS`; `conditional_pass` is a subtype, not a fourth output.
 
 This validator does not prove correctness.  
 It only checks whether the record contains the minimum control handles for future-restartable closure.
@@ -95,6 +106,7 @@ A minimal record may include fields such as:
 - `stop_condition`
 - `reanchor_condition`
 - `next_self_should_not`
+- `scope_profile`
 
 These fields are intended to preserve the minimum control structure required for future restartability.
 
