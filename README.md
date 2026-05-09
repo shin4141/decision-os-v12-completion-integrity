@@ -2,9 +2,19 @@
 
 # Decision-OS V12: Completion Integrity
 
-Minimal companion artifact for **Decision-OS V12: Completion Integrity**.
+AI-assisted development often fails at the handoff, not the code edit.
 
-This repository provides a minimal, inspectable operational artifact for the paper:
+The AI says "done."<br>
+The next session starts later.
+The stop conditions, assumptions, constraints, or evidence anchors that made the work safe to continue are no longer visible. The update may look complete while the future self has lost the control handles needed to restart it.
+
+That is **False Completion**.
+
+**Completion Integrity** prevents this by recording whether an update is closed in a future-restartable form. It is a small schema, checklist, examples, and validator for AI-assisted developers who need work to survive across sessions.
+
+It works with Claude Code, Codex, ChatGPT, and multi-session AI workflows.
+
+This repository is a minimal, inspectable companion artifact for the paper:
 
 **Decision-OS V12: Completion Integrity**  
 **Subtitle:** *Future-Restartable Closure for Self-Evolving AI Agents*
