@@ -117,6 +117,38 @@ Do not implement MAYBE items by default.
 
 ---
 
+## [CONTEXT HYGIENE GATE]
+
+Before summarizing, compressing, reorganizing, or carrying context across sessions, preserve the control handles needed for future restartability.
+
+Context hygiene is allowed only when it keeps the future self able to:
+
+- recover the mission,
+- see the current base and rollback point,
+- preserve KEEP constraints,
+- identify open unknowns and assumptions,
+- find evidence anchors,
+- see stop conditions,
+- see re-anchor conditions,
+- and avoid prohibited next actions.
+
+Context hygiene must not:
+
+- delete unresolved items to make the work look cleaner,
+- convert assumptions into facts,
+- remove evidence anchors,
+- remove stop conditions,
+- remove responsibility boundaries,
+- hide uncertainty,
+- infer completion from tone or fluency,
+- perform automatic cleanup,
+- add deletion logic,
+- or introduce scoring or decision-engine behavior.
+
+If context is compressed and any critical control handle is missing, mark the update as `DELAY` or `BLOCK` rather than treating it as complete.
+
+---
+
 ## [ROLLBACK]
 
 Before risky changes, name a rollback point.
