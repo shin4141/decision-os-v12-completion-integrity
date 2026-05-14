@@ -2,16 +2,29 @@
 
 # Decision-OS V12: Completion Integrity
 
-AI-assisted development often fails at the handoff, not the code edit.
+**Stop your AI from calling broken handoffs “done.”**
 
-The AI says "done."<br>
-The next session starts later.
-The stop conditions, assumptions, constraints, or evidence anchors that made the work safe to continue are no longer visible. The update may look complete while the future self has lost the control handles needed to restart it.
+AI-assisted work is moving across Claude Code, Codex, ChatGPT, Gemini, Grok, and long-running sessions.
+
+That is where things break.
+
+The AI says **“done.”**  
+But the next model starts from a broken state.
+
+- the assumption is gone
+- the stop condition was never written down
+- the evidence anchor is missing
+- the file or interface that must not change gets changed
+- the next session cannot tell what was unresolved
+- the user has to reconstruct the work from memory
 
 That is **False Completion**.
 
-**Completion Integrity** prevents this by recording whether an update is closed in a future-restartable form. It is a small schema, checklist, examples, and validator for AI-assisted developers who need work to survive across sessions.
+**Completion Integrity** is a minimal protocol for preventing that failure.
 
+It records what changed, what remains unresolved, what must be preserved, where to restart, when to stop, and what the next AI must not change.
+
+This repository provides a small schema, checklist, examples, and validator for AI-assisted developers who need work to survive across tools, models, and sessions.
 It works with Claude Code, Codex, ChatGPT, and multi-session AI workflows.
 
 This repository is a minimal, inspectable companion artifact for the paper:
