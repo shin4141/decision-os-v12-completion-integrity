@@ -99,6 +99,8 @@ cd decision-os-v12-completion-integrity
 Try the practical examples first:
 
 ```bash
+python tools/v12_gate.py init > completion_record.json
+python tools/v12_gate.py check completion_record.json
 python tools/v12_gate.py check examples/block.public_missing_rollback.json
 python tools/validate_completion_record.py examples/pass.restartable_local_change.json
 python tools/validate_completion_record.py examples/delay.missing_stop_conditions.json
