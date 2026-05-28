@@ -18,6 +18,16 @@ Do not close an update unless the future self can reconnect, verify, stop, revis
 
 ---
 
+## V12 Gate Usage Boundary
+
+The V12 Gate preserves future-restartable control handles.
+
+It is not a tool for optimizing records toward PASS. DELAY and BLOCK are valid outputs when they preserve Completion Integrity.
+
+PASS is not a truth guarantee.
+
+---
+
 ## Gate Inputs
 
 Before closing an update, confirm that the following are present.
