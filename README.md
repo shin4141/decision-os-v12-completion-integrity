@@ -108,6 +108,9 @@ The artifact focuses on whether a future self can:
 - `docs/completion-record-placement.md`
   Recommended `.v12/` placement convention for using V12 Gate in your own repo.
 
+- `docs/github-actions-template.md`
+  Safe check-only GitHub Actions template for external repositories.
+
 - `tools/validate_completion_record.py`  
   A lightweight validator for structure-level checking.
 
