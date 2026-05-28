@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Decision-OS V12 Gate: Completion Integrity"
+authors:
+  - family-names: "Nagata"
+    given-names: "Shinichi"
+    orcid: "https://orcid.org/0009-0005-6903-1862"
+repository-code: "https://github.com/shin4141/decision-os-v12-completion-integrity"
+type: software
+license: "MIT"

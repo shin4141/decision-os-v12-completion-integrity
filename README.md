@@ -102,9 +102,8 @@ Try the practical examples first:
 python tools/v12_gate.py init > completion_record.json
 python tools/v12_gate.py check completion_record.json
 python tools/v12_gate.py check examples/block.public_missing_rollback.json
-python tools/validate_completion_record.py examples/pass.restartable_local_change.json
-python tools/validate_completion_record.py examples/delay.missing_stop_conditions.json
-python tools/validate_completion_record.py examples/block.public_missing_rollback.json
+python tools/v12_gate.py check examples/pass.restartable_local_change.json
+python tools/v12_gate.py check examples/delay.missing_stop_conditions.json
 ```
 
 Start with the DELAY and BLOCK examples first; they show what V12 Gate is designed to prevent.
