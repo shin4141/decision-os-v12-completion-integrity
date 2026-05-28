@@ -102,6 +102,9 @@ The artifact focuses on whether a future self can:
 - `docs/ai-coding-workflow.md`
   Use V12 Gate with Codex / Claude Code / Cursor-style coding agents.
 
+- `docs/prompt-for-coding-agents.md`
+  Copy-paste prompt for Codex / Claude Code / Cursor-style coding agents.
+
 - `tools/validate_completion_record.py`  
   A lightweight validator for structure-level checking.
 
