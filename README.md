@@ -24,6 +24,23 @@ That is **False Completion**.
 
 It records what changed, what remains unresolved, what must be preserved, where to restart, when to stop, and what the next AI must not change.
 
+## At a Glance
+
+Stop AI from calling unfinished work done.
+
+V12 Gate checks whether a Completion Record preserves enough restart handles for the next human, AI session, or coding agent to safely resume work.
+
+It is not a correctness checker, code reviewer, scoring system, or tool for forcing PASS.
+
+Start with the DELAY and BLOCK examples first because they show what the gate prevents.
+
+Minimal workflow:
+
+- generate a starter record with `python tools/v12_gate.py init`
+- fill in evidence, rollback or restart point, stop conditions, and prohibited next actions
+- run `python tools/v12_gate.py check <record>`
+- treat DELAY and BLOCK as valid integrity-preserving outputs
+
 This repository provides a small schema, checklist, examples, and validator for AI-assisted developers who need work to survive across tools, models, and sessions.
 It works with Claude Code, Codex, ChatGPT, and multi-session AI workflows.
 
