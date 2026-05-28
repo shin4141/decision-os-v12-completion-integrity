@@ -21,13 +21,28 @@ jobs:
           python-version: "3.11"
 
       - name: Validate PASS example
-        run: python tools/validate_completion_record.py examples/pass_example.json
+        run: python tools/v12_gate.py check examples/pass_example.json
 
       - name: Validate DELAY example
-        run: python tools/validate_completion_record.py examples/delay_example.json
+        run: python tools/v12_gate.py check examples/delay_example.json
 
       - name: Validate BLOCK example
-        run: python tools/validate_completion_record.py examples/block_example.json
+        run: python tools/v12_gate.py check examples/block_example.json
 
       - name: Validate conditional PASS example
-        run: python tools/validate_completion_record.py examples/conditional_pass_example.json
+        run: python tools/v12_gate.py check examples/conditional_pass_example.json
+
+      - name: Validate restartable local change example
+        run: python tools/v12_gate.py check examples/pass.restartable_local_change.json
+
+      - name: Validate missing stop conditions example
+        run: python tools/v12_gate.py check examples/delay.missing_stop_conditions.json
+
+      - name: Validate missing evidence anchor example
+        run: python tools/v12_gate.py check examples/delay.missing_evidence_anchor.json
+
+      - name: Validate owner visible pending example
+        run: python tools/v12_gate.py check examples/delay.owner_visible_pending.json
+
+      - name: Validate public missing rollback example
+        run: python tools/v12_gate.py check examples/block.public_missing_rollback.json
