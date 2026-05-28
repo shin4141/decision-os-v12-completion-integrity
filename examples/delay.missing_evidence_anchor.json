@@ -1,0 +1,32 @@
+{
+  "as_of": "2026-05-28T00:00:00Z",
+  "objective": "Close an AI-generated completion claim that has no recoverable evidence anchor.",
+  "what_changed": [
+    "AI claimed the task was complete after summarizing the result."
+  ],
+  "unresolved": [
+    "No evidence anchor is attached.",
+    "The future self cannot verify which files, logs, or commits support the claim."
+  ],
+  "must_preserve": [
+    "Evidence anchors must remain visible.",
+    "Completion Integrity is future-restartable closure.",
+    "PASS is not a truth guarantee."
+  ],
+  "evidence_anchor": [],
+  "restart_point": "Recover the missing evidence path before deciding whether the completion claim can close.",
+  "stop_condition": [
+    "Stop if the evidence anchor cannot be recovered."
+  ],
+  "reanchor_condition": [
+    "Re-anchor if the supporting file, log, or commit differs from the AI summary."
+  ],
+  "next_self_should_not": [
+    "Do not accept the AI completion claim without evidence.",
+    "Do not invent an evidence anchor after the fact."
+  ],
+  "scope_profile": "reusable",
+  "gate_output": "DELAY",
+  "gate_subtype": "none",
+  "notes": "This example prevents False Completion by preserving the missing evidence-anchor problem."
+}

@@ -1,0 +1,33 @@
+{
+  "as_of": "2026-05-28T00:00:00Z",
+  "objective": "Close a public-facing release note after publishing a visible change.",
+  "what_changed": [
+    "Prepared a public-facing change summary and marked the release handoff complete."
+  ],
+  "unresolved": [
+    "Rollback target is not named.",
+    "Restart point is missing for the future self.",
+    "No stop condition explains when to block publication or rollback."
+  ],
+  "must_preserve": [
+    "Public or irreversible-facing changes need recoverable rollback and restart handles.",
+    "Completion Integrity is future-restartable closure.",
+    "PASS is not a truth guarantee."
+  ],
+  "evidence_anchor": [
+    "release-note-draft-2026-05-28"
+  ],
+  "restart_point": "",
+  "stop_condition": [],
+  "reanchor_condition": [
+    "Re-anchor if the public artifact, release branch, or rollback target cannot be verified."
+  ],
+  "next_self_should_not": [
+    "Do not publish or claim completion without a rollback target.",
+    "Do not treat a public-facing summary as sufficient evidence of restartability."
+  ],
+  "scope_profile": "irreversible",
+  "gate_output": "BLOCK",
+  "gate_subtype": "none",
+  "notes": "This example uses the current validator's irreversible profile behavior: an empty critical stop_condition under irreversible scope infers BLOCK."
+}

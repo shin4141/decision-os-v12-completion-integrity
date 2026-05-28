@@ -1,0 +1,37 @@
+{
+  "as_of": "2026-05-28T00:00:00Z",
+  "objective": "Close a shared handoff after internal validation passed but owner-visible review is still pending.",
+  "what_changed": [
+    "Recorded successful internal validation for a shared artifact."
+  ],
+  "unresolved": [
+    "Owner-visible review remains pending.",
+    "The schema has no dedicated owner_visible_check field, so this pending state is recorded here."
+  ],
+  "must_preserve": [
+    "Internal validation is not owner acceptance.",
+    "Responsibility boundaries must remain visible.",
+    "V12 Gate is not for optimizing records toward PASS."
+  ],
+  "evidence_anchor": [
+    "internal-validation-log-2026-05-28"
+  ],
+  "restart_point": "Resume at owner-visible review before closing the shared handoff.",
+  "stop_condition": [],
+  "reanchor_condition": [
+    "Re-anchor if the owner-visible review changes the acceptance target or responsibility boundary."
+  ],
+  "next_self_should_not": [
+    "Do not treat internal validation as owner acceptance.",
+    "Do not remove the pending owner-visible review from unresolved items."
+  ],
+  "scope_profile": "shared",
+  "gate_output": "DELAY",
+  "gate_subtype": "none",
+  "responsibility_boundary": {
+    "decision_owner": "Repository owner",
+    "review_workflow": "ai_only",
+    "responsibility_note": "AI-only validation has run, but owner-visible review remains pending before closure."
+  },
+  "notes": "This example represents owner-visible pending status with supported schema fields only."
+}

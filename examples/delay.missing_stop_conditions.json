@@ -1,0 +1,31 @@
+{
+  "as_of": "2026-05-28T00:00:00Z",
+  "objective": "Close a handoff that appears complete but has no explicit stop or recheck conditions.",
+  "what_changed": [
+    "Summarized the completed code review and claimed the follow-up is ready to close."
+  ],
+  "unresolved": [
+    "The next self has no stated condition for when to stop or recheck the claim."
+  ],
+  "must_preserve": [
+    "Completion Integrity requires visible stop conditions.",
+    "PASS is not a truth guarantee.",
+    "V12 Gate is not for optimizing records toward PASS."
+  ],
+  "evidence_anchor": [
+    "review-log-2026-05-28"
+  ],
+  "restart_point": "Resume by checking whether the review evidence still supports the claimed closure.",
+  "stop_condition": [],
+  "reanchor_condition": [
+    "Re-anchor if review evidence changes or a missing stop condition cannot be reconstructed."
+  ],
+  "next_self_should_not": [
+    "Do not close this as PASS just because the summary sounds complete.",
+    "Do not remove the missing stop-condition issue to make the record cleaner."
+  ],
+  "scope_profile": "reusable",
+  "gate_output": "DELAY",
+  "gate_subtype": "none",
+  "notes": "This example prevents False Completion by delaying closure when the stop condition is missing."
+}

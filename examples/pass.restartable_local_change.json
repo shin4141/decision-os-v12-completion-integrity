@@ -1,0 +1,41 @@
+{
+  "as_of": "2026-05-28T00:00:00Z",
+  "objective": "Close a small local documentation change in a future-restartable form.",
+  "what_changed": [
+    "Added a local documentation note with a bounded diff."
+  ],
+  "unresolved": [
+    "No known unresolved item for this local example."
+  ],
+  "must_preserve": [
+    "PASS is not a truth guarantee.",
+    "Completion Integrity is future-restartable closure.",
+    "DELAY and BLOCK remain valid outputs when they preserve integrity."
+  ],
+  "evidence_anchor": [
+    "git diff --stat HEAD~1..HEAD",
+    "validator output for affected examples"
+  ],
+  "restart_point": "Resume by reviewing the bounded documentation diff and the validation output.",
+  "stop_condition": [
+    "Stop if the diff includes schema, validator, example behavior, or workflow changes outside the local documentation scope.",
+    "Stop if PASS is treated as proof of truth instead of restartable closure."
+  ],
+  "reanchor_condition": [
+    "Re-anchor if the base commit changes.",
+    "Re-anchor if the local documentation scope expands."
+  ],
+  "next_self_should_not": [
+    "Do not expand this into scoring, weights, thresholds, or decision-engine behavior.",
+    "Do not remove evidence anchors or stop conditions to make the record look cleaner."
+  ],
+  "scope_profile": "reusable",
+  "gate_output": "PASS",
+  "gate_subtype": "none",
+  "responsibility_boundary": {
+    "decision_owner": "Repository owner",
+    "review_workflow": "human_reviewed",
+    "responsibility_note": "The human owner remains responsible for accepting the documentation change."
+  },
+  "notes": "This example shows a restartable local change with evidence, stop conditions, restart point, and responsibility boundary."
+}
