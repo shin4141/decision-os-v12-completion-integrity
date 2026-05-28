@@ -105,6 +105,9 @@ The artifact focuses on whether a future self can:
 - `docs/prompt-for-coding-agents.md`
   Copy-paste prompt for Codex / Claude Code / Cursor-style coding agents.
 
+- `docs/completion-record-placement.md`
+  Recommended `.v12/` placement convention for using V12 Gate in your own repo.
+
 - `tools/validate_completion_record.py`  
   A lightweight validator for structure-level checking.
 
