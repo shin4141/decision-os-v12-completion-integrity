@@ -96,21 +96,25 @@ git clone https://github.com/shin4141/decision-os-v12-completion-integrity.git
 cd decision-os-v12-completion-integrity
 ```
 
-Run the lightweight validator:
+Try the practical examples first:
 
 ```bash
-python tools/validate_completion_record.py examples/pass_example.json
-python tools/validate_completion_record.py examples/delay_example.json
-python tools/validate_completion_record.py examples/block_example.json
-python tools/validate_completion_record.py examples/conditional_pass_example.json
+python tools/validate_completion_record.py examples/pass.restartable_local_change.json
+python tools/validate_completion_record.py examples/delay.missing_stop_conditions.json
+python tools/validate_completion_record.py examples/block.public_missing_rollback.json
 ```
 
-Expected behavior:
+Start with the DELAY and BLOCK examples first; they show what V12 Gate is designed to prevent.
 
-- `examples/pass_example.json` should infer `PASS`.
-- `examples/delay_example.json` may warn if a required field is incomplete.
-- `examples/block_example.json` should infer `BLOCK` because critical control handles are missing.
-- `examples/conditional_pass_example.json` should infer `PASS`; `conditional_pass` is a subtype, not a fourth output.
+Example map:
+
+| Example | Purpose | Expected |
+| --- | --- | --- |
+| `examples/pass.restartable_local_change.json` | Restartable local closure | `PASS` |
+| `examples/delay.missing_stop_conditions.json` | Handoff lacks stop/recheck conditions | `DELAY` |
+| `examples/delay.missing_evidence_anchor.json` | Completion claim lacks evidence anchor | `DELAY` |
+| `examples/delay.owner_visible_pending.json` | Internal validation passed but owner/responsibility confirmation is pending | `DELAY` |
+| `examples/block.public_missing_rollback.json` | Public-facing or high-impact closure lacks rollback/restart point | `BLOCK` |
 
 This validator does not prove correctness.  
 It only checks whether the record contains the minimum control handles for future-restartable closure.
