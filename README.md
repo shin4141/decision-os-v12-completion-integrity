@@ -111,6 +111,9 @@ The artifact focuses on whether a future self can:
 - `docs/github-actions-template.md`
   Safe check-only GitHub Actions template for external repositories.
 
+- `docs/before-after-demo.md`
+  Static before/after demo showing how V12 Gate prevents hidden closure.
+
 - `tools/validate_completion_record.py`  
   A lightweight validator for structure-level checking.
 
