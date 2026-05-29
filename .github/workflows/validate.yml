@@ -7,6 +7,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -23,6 +26,11 @@ jobs:
       - name: Validate PASS example
         run: python tools/v12_gate.py check examples/pass_example.json
 
+      # DELAY and BLOCK are valid gate outputs.
+      # These steps check that example records are structurally correct
+      # and that declared gate_output matches inferred output.
+      # A green check means the DELAY/BLOCK record is well-formed,
+      # not that DELAY/BLOCK are failures.
       - name: Validate DELAY example
         run: python tools/v12_gate.py check examples/delay_example.json
 
