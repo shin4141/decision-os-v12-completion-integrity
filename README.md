@@ -114,6 +114,9 @@ The artifact focuses on whether a future self can:
 - `docs/before-after-demo.md`
   Static before/after demo showing how V12 Gate prevents hidden closure.
 
+- `docs/install-in-your-repo.md`
+  Minimal guide for installing V12 Gate in another repository.
+
 - `tools/validate_completion_record.py`  
   A lightweight validator for structure-level checking.
 
