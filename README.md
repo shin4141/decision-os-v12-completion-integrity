@@ -155,6 +155,7 @@ Example map:
 
 This validator does not prove correctness.  
 It only checks whether the record contains the minimum control handles for future-restartable closure.
+`gate_output` is self-declared by the record author; the validator runs `infer_gate_output()` independently and flags mismatches. Agreement between declaration and inference is required for PASS.
 
 ## Minimal Completion Record
 

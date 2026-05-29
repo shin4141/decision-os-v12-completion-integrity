@@ -58,11 +58,33 @@ def print_blank_template():
     return 0
 
 
+def summarize_value(value):
+    if value is None:
+        return ""
+    if isinstance(value, list):
+        if not value:
+            return ""
+        preview = "; ".join(str(item) for item in value[:2])
+        return preview + ("; ..." if len(value) > 2 else "")
+    return str(value)
+
+
+def print_closure_summary(record):
+    print("\nClosure summary:")
+    print(f"- objective: {summarize_value(record.get('objective'))}")
+    print(f"- evidence_anchor: {summarize_value(record.get('evidence_anchor'))}")
+    print(f"- restart_point: {summarize_value(record.get('restart_point'))}")
+    print("- note: PASS is not a truth guarantee.")
+
+
 def check_record(path):
     record = load_json(path)
     errors, warnings, inferred_output = validate(record)
 
     print(f"V12 Gate: {inferred_output}")
+
+    if inferred_output == "PASS" and not errors:
+        print_closure_summary(record)
 
     if errors:
         print("\nERRORS:")

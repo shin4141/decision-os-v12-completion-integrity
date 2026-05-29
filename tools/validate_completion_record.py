@@ -57,6 +57,22 @@ def is_empty(value):
     return False
 
 
+def has_too_short_next_self_should_not(record):
+    """Return True when prohibition entries are present but too generic."""
+    # V12 paper: "what the next self should not do" (Table V)
+    value = record.get("next_self_should_not")
+    if is_empty(value):
+        return False
+
+    entries = value if isinstance(value, list) else [value]
+    text_entries = [
+        item.strip()
+        for item in entries
+        if isinstance(item, str) and item.strip()
+    ]
+    return any(len(item) < 20 for item in text_entries)
+
+
 def load_json(path):
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -115,6 +131,9 @@ def validate(record):
         warnings.append(
             "empty critical fields detected: " + ", ".join(empty_critical)
         )
+
+    if has_too_short_next_self_should_not(record):
+        warnings.append("next_self_should_not entries appear too short to be actionable")
 
     expected = infer_gate_output(record, empty_required, empty_critical)
 
