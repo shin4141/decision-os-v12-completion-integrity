@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This guide shows the minimal way to copy V12 Gate into another repository so AI-coded work can be checked before being accepted as "done."
+This guide shows the minimal way to copy V12 Gate into another repository. V12 Gate checks whether an update is closed in a future-restartable form: not whether it is correct, but whether the future self can reconnect, verify, stop, and re-anchor it.
 
 ## Minimal Files to Copy
 
@@ -40,6 +40,8 @@ mkdir -p .v12
 python tools/v12_gate.py init > .v12/completion_record.json
 ```
 
+This file is not a config file. It is a control handoff record: the minimum information the future self needs to restart the work safely.
+
 ## Step 2: Ask the Coding Agent to Fill It
 
 Use `docs/prompt-for-coding-agents.md`, or give the coding agent this short instruction:
@@ -74,6 +76,7 @@ Use `docs/github-actions-template.md` for a safe check-only workflow template.
 - V12 Gate does not auto-fill records.
 - V12 Gate is not a scoring system.
 - V12 Gate is not for forcing PASS.
+- DELAY and BLOCK are integrity-preserving outputs. They are not failures; they prevent False Completion from being passed forward.
 
 ## Recommended First Test
 
