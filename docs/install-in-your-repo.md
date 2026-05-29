@@ -4,6 +4,8 @@
 
 This guide shows the minimal way to copy V12 Gate into another repository. V12 Gate checks whether an update is closed in a future-restartable form: not whether it is correct, but whether the future self can reconnect, verify, stop, and re-anchor it.
 
+This file is the external adoption and install guide.
+
 ## Minimal Files to Copy
 
 Copy these files into the target repository:

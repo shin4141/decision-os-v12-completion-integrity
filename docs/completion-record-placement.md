@@ -4,6 +4,8 @@
 
 V12 Gate becomes more useful when Completion Records have a predictable location inside a repository. This is a placement convention only, not a schema change or workflow enforcement.
 
+This file defines the placement convention only.
+
 ## Recommended Default
 
 Use:

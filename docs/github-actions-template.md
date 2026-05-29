@@ -6,6 +6,8 @@ Use this template when you want your own repository to check a V12 Completion Re
 
 This template is check-only. It does not comment on PRs, does not write to the repository, and does not block merges by itself unless the repository owner chooses to make the check required.
 
+This file defines the check-only CI template only.
+
 ## Expected Record Location
 
 Default:

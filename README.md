@@ -122,6 +122,18 @@ The artifact focuses on whether a future self can:
 
 ---
 
+## Recommended Reading Path
+
+You do not need to read every document before trying V12 Gate.
+
+- Start here: `README.md`
+- See the failure: `docs/before-after-demo.md`
+- Install in your repo: `docs/install-in-your-repo.md`
+- Give this to your coding agent: `docs/prompt-for-coding-agents.md`
+- Optional CI check-only setup: `docs/github-actions-template.md`
+
+---
+
 ## Quick Start
 
 Clone the repository:

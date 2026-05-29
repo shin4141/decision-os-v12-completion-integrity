@@ -4,6 +4,8 @@
 
 Use V12 Gate before an AI coding agent calls work "done." The gate checks whether the next human, AI session, or coding agent can safely restart from the Completion Record.
 
+This file explains the workflow context for using V12 Gate with coding agents.
+
 ## Minimal Workflow
 
 - Start a bounded task.
@@ -16,6 +18,8 @@ Use V12 Gate before an AI coding agent calls work "done." The gate checks whethe
 - If BLOCK: do not accept closure; restore control or rollback.
 
 ## Prompt to Give a Coding Agent
+
+For the maintained copy-paste prompt, use `docs/prompt-for-coding-agents.md`.
 
 ```text
 Use V12 Gate before calling this task done.
