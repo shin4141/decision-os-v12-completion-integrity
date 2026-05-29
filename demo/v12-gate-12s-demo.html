@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V12 Gate 12s Demo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d12;
+      --panel: #101820;
+      --panel-strong: #162331;
+      --text: #edf7f2;
+      --muted: #93a8b8;
+      --green: #62f0a8;
+      --amber: #ffcc66;
+      --blue: #7ab7ff;
+      --red: #ff6f7d;
+      --line: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(122, 183, 255, 0.12), transparent 32%),
+        linear-gradient(135deg, #090d12 0%, #111823 52%, #071014 100%);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    main {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+
+    .terminal {
+      width: min(390px, calc(100vw - 28px));
+      height: min(694px, calc(100vh - 28px));
+      aspect-ratio: 9 / 16;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(16, 24, 32, 0.92);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
+      overflow: hidden;
+    }
+
+    .topbar {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 13px;
+      background: rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .dot {
+      flex: 0 0 auto;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .dot:nth-child(2) {
+      background: var(--amber);
+    }
+
+    .dot:nth-child(3) {
+      background: var(--green);
+    }
+
+    .title {
+      margin-left: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stage {
+      position: relative;
+      height: calc(100% - 40px);
+      overflow: hidden;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      padding: 34px 24px 46px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(14px);
+      animation: sceneCycle 12s ease-in-out infinite;
+    }
+
+    .scene-1 {
+      animation-delay: 0s;
+    }
+
+    .scene-2 {
+      animation-delay: 3s;
+    }
+
+    .scene-3 {
+      animation-delay: 6s;
+    }
+
+    .scene-4 {
+      animation-delay: 9s;
+      text-align: center;
+      align-items: center;
+    }
+
+    @keyframes sceneCycle {
+      0% {
+        opacity: 0;
+        transform: translateX(14px);
+      }
+      4%,
+      21% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      25%,
+      100% {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+    }
+
+    .label {
+      color: var(--blue);
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .main-text,
+    .final {
+      font-size: 35px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .main-text {
+      color: var(--green);
+    }
+
+    .caption {
+      max-width: 310px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .question-list,
+    .missing-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .question-list li,
+    .missing-list li {
+      font-size: 24px;
+      line-height: 1.25;
+    }
+
+    .question-list li {
+      color: var(--amber);
+    }
+
+    .gate {
+      color: var(--amber);
+      font-size: 58px;
+      line-height: 0.95;
+      font-weight: 800;
+    }
+
+    .subhead {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .missing-list li::before {
+      content: "* ";
+      color: var(--red);
+    }
+
+    .final {
+      max-width: 330px;
+      color: var(--text);
+      font-size: 34px;
+    }
+
+    .brand {
+      color: var(--green);
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    .subtext {
+      color: var(--blue);
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .url {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .progress::before {
+      content: "";
+      display: block;
+      height: 100%;
+      width: 100%;
+      transform-origin: left;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--amber));
+      animation: progress 12s linear infinite;
+    }
+
+    .terminal.restarting .scene,
+    .terminal.restarting .progress::before {
+      animation: none;
+    }
+
+    @keyframes progress {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .replay {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(16, 24, 32, 0.9);
+      color: var(--text);
+      font: inherit;
+      font-size: 12px;
+      padding: 9px 12px;
+      cursor: pointer;
+    }
+
+    .replay:focus,
+    .replay:hover {
+      border-color: var(--green);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="terminal" id="demo" aria-label="V12 Gate 12 second demo">
+      <div class="topbar">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="title">v12-gate-demo — hidden closure check</span>
+      </div>
+
+      <div class="stage">
+        <section class="scene scene-1">
+          <div class="label">AI Coding Agent</div>
+          <div class="main-text">"Done. Everything is ready."</div>
+          <div class="caption">But no completion record was checked.</div>
+        </section>
+
+        <section class="scene scene-2">
+          <div class="label">Next session</div>
+          <ul class="question-list">
+            <li>"Where is the evidence?"</li>
+            <li>"Where is the rollback point?"</li>
+            <li>"What should I not touch?"</li>
+          </ul>
+          <div class="caption">The work cannot be safely restarted.</div>
+        </section>
+
+        <section class="scene scene-3">
+          <div class="label">V12 Gate</div>
+          <div class="gate">DELAY</div>
+          <div class="subhead">Missing restart handles:</div>
+          <ul class="missing-list">
+            <li>evidence_anchor</li>
+            <li>stop_condition</li>
+            <li>next_self_should_not</li>
+          </ul>
+          <div class="caption">Do not accept completion yet.</div>
+        </section>
+
+        <section class="scene scene-4">
+          <div class="final">Stop AI from calling unfinished work done.</div>
+          <div class="subtext">V12 Gate checks restartable closure.</div>
+          <div class="brand">V12 Gate</div>
+          <div class="url">github.com/shin4141/decision-os-v12-completion-integrity</div>
+        </section>
+      </div>
+
+      <div class="progress" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <button class="replay" type="button" id="replay">Replay</button>
+
+  <script>
+    const replay = document.getElementById("replay");
+    const demo = document.getElementById("demo");
+
+    replay.addEventListener("click", () => {
+      demo.classList.add("restarting");
+      void demo.offsetHeight;
+      demo.classList.remove("restarting");
+    });
+  </script>
+</body>
+</html>
