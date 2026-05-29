@@ -1,0 +1,35 @@
+{
+  "as_of": "2026-05-29T00:00:00Z",
+  "objective": "Close an AI-coded deployment or workflow update.",
+  "what_changed": [
+    "Updated a deployment workflow.",
+    "Changed production-facing configuration.",
+    "Marked the deployment update as done."
+  ],
+  "unresolved": [
+    "Whether the deployed change can be safely rolled back: unknown.",
+    "Whether the production-facing effect was verified by an owner: unknown.",
+    "Whether the next coding agent knows what not to touch: unknown."
+  ],
+  "must_preserve": [
+    "PASS is not a truth guarantee.",
+    "Completion Integrity is future-restartable closure.",
+    "Production-facing closure must preserve evidence, rollback or restart point, and stop conditions.",
+    "DELAY and BLOCK remain valid integrity-preserving outputs."
+  ],
+  "evidence_anchor": [],
+  "restart_point": "",
+  "stop_condition": [],
+  "reanchor_condition": [
+    "Re-anchor if the deployment target, owner verification state, or rollback path changes."
+  ],
+  "next_self_should_not": [
+    "Do not treat the deployment as complete without an evidence anchor.",
+    "Do not continue production-facing changes until a rollback or restart point is recorded.",
+    "Do not let the next coding agent infer missing stop conditions from the commit message."
+  ],
+  "scope_profile": "irreversible",
+  "gate_output": "BLOCK",
+  "gate_subtype": "none",
+  "notes": "This is a developer-facing BLOCK example because a production-facing or irreversible closure lacks evidence, rollback or restart point, and stop conditions."
+}

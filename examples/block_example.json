@@ -6,9 +6,9 @@
     "Marked the work as complete."
   ],
   "unresolved": [
-    "Unknowns were removed from the handoff.",
-    "The original evidence path is no longer available.",
-    "The next self cannot verify whether the summary preserves the original Canon."
+    "Whether the original Canon was preserved: unknown.",
+    "Whether the compressed summary is reconnectable: unknown.",
+    "Whether the missing evidence path can be recovered: unknown."
   ],
   "must_preserve": [
     "Completion Integrity",
