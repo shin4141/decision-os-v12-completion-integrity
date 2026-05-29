@@ -18,6 +18,19 @@ Do not close an update unless the future self can reconnect, verify, stop, revis
 
 ---
 
+## Minimal Closure Question
+
+Before closing, ask:
+
+> Can the future self safely restart from what the current self is about to call complete?
+
+This checklist is only a support structure for answering that question. It is not the source of completion itself.
+
+If the answer is unclear, choose DELAY.  
+If closure would hide risk or break reconnection, choose BLOCK.
+
+---
+
 ## V12 Gate Usage Boundary
 
 The V12 Gate preserves future-restartable control handles.
@@ -31,6 +44,8 @@ PASS is not a truth guarantee.
 ## Gate Inputs
 
 Before closing an update, confirm that the following are present.
+
+Checking a box is not sufficient. Each field must contain content specific enough for the future self to act on; a generic entry satisfies the form but not the gate.
 
 - [ ] `as_of`  
   Timestamp or As-of marker for when the update was produced.
@@ -107,6 +122,7 @@ Typical BLOCK conditions:
 
 - Past Fidelity is violated.
 - Canon or KEEP constraints were removed.
+- When `scope_profile` is `irreversible`, a missing Evidence Anchor or Stop Condition is sufficient for BLOCK.
 - Evidence Anchor is missing for an irreversible claim.
 - The future self cannot restart.
 - No Stop Condition exists for a known risk.
@@ -115,17 +131,6 @@ Typical BLOCK conditions:
 - The next self would be unable to stop or re-anchor.
 
 BLOCK means the update must not be closed as complete.
-
----
-
-## Minimal Closure Question
-
-Before closing, ask:
-
-> Can the future self safely restart from what the current self is about to call complete?
-
-If the answer is unclear, choose DELAY.  
-If closure would hide risk or break reconnection, choose BLOCK.
 
 ---
 
