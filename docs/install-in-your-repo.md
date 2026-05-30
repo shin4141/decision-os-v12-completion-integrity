@@ -70,6 +70,21 @@ python tools/v12_gate.py check .v12/completion_record.json
 
 Use `docs/github-actions-template.md` for a safe check-only workflow template.
 
+## First Local Smoke Test
+
+Before wiring V12 Gate into CI, run one local check that is expected to return DELAY or BLOCK.
+
+Inside this repository:
+
+```bash
+python tools/v12_gate.py check examples/block.public_missing_rollback.json
+python tools/v12_gate.py check examples/delay.missing_stop_conditions.json
+```
+
+Inside your own repository, create an intentionally incomplete `.v12/completion_record.json` and confirm that V12 Gate returns DELAY.
+
+This is a successful smoke test when the gate makes missing restart handles visible. DELAY and BLOCK are valid integrity-preserving outputs, not test failures. Do not treat PASS as the goal; the goal is a restartable handoff.
+
 ## Boundaries
 
 - V12 Gate does not replace tests.
@@ -79,13 +94,3 @@ Use `docs/github-actions-template.md` for a safe check-only workflow template.
 - V12 Gate is not a scoring system.
 - V12 Gate is not for forcing PASS.
 - DELAY and BLOCK are integrity-preserving outputs. They are not failures; they prevent False Completion from being passed forward.
-
-## Recommended First Test
-
-If you are testing inside the V12 Gate repository, run:
-
-```bash
-python tools/v12_gate.py check examples/block.public_missing_rollback.json
-```
-
-If you are testing inside your own repository, create an intentionally incomplete `.v12/completion_record.json` and confirm it returns DELAY.

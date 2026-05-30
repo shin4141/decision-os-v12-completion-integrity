@@ -29,6 +29,8 @@ But the handoff is missing:
 
 This may look complete, but the next human, AI session, or coding agent cannot safely restart.
 
+The missing handoff details are the problem. Even if tests or CI happen to pass, the next session still cannot tell what evidence was checked, where to resume, when to stop, what assumptions remain unresolved, or what it must not change.
+
 ## After: V12 Gate checks the Completion Record
 
 Run:
@@ -36,6 +38,14 @@ Run:
 ```bash
 python tools/v12_gate.py check .v12/completion_record.json
 ```
+
+Instead of accepting a vague "done", V12 Gate expects the Completion Record to preserve restart handles such as:
+
+- evidence anchor
+- rollback or restart point
+- stop/recheck condition
+- unresolved assumptions
+- next-self prohibition
 
 Example output:
 
@@ -48,6 +58,29 @@ WARNINGS:
 ```
 
 DELAY does not mean the work failed. It means the work should not be accepted as complete until the missing restart handles are restored.
+
+After the record is repaired, the handoff should explain how a future self can reconnect to the work:
+
+```text
+Evidence anchor:
+- workflow run URL
+- relevant diff or validation output
+
+Rollback/restart point:
+- resume from the last known good commit or named rollback target
+
+Stop/recheck condition:
+- stop if the workflow permissions change
+- recheck if the base branch moves
+
+Unresolved assumptions:
+- owner review is still required before accepting the change
+
+Next-self prohibition:
+- do not expand this into PR comment automation or write-permission workflow behavior
+```
+
+That shape is restartable closure. It is not a correctness proof.
 
 ## PR-comment-style example
 

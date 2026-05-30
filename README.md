@@ -41,6 +41,20 @@ Minimal workflow:
 - run `python tools/v12_gate.py check <record>`
 - treat DELAY and BLOCK as valid integrity-preserving outputs
 
+## 3-Minute Mental Model
+
+V12 Gate checks **restartability**, not correctness.
+
+CI can pass while the handoff is still broken: tests may be green, but the next human or AI session may still lack the evidence, restart point, stop conditions, unresolved assumptions, or prohibited next actions needed to continue safely.
+
+The gate has only three outputs:
+
+- **PASS**: the handoff is restartable enough to close; this is not a truth guarantee.
+- **DELAY**: the handoff is missing restart handles and should not be accepted as complete yet.
+- **BLOCK**: closure would preserve a serious False Completion risk.
+
+V12 Gate is not for forcing PASS. DELAY and BLOCK are valid integrity-preserving outputs.
+
 This repository provides a small schema, checklist, examples, and validator for AI-assisted developers who need work to survive across tools, models, and sessions.
 It works with Claude Code, Codex, ChatGPT, and multi-session AI workflows.
 
@@ -143,19 +157,26 @@ git clone https://github.com/shin4141/decision-os-v12-completion-integrity.git
 cd decision-os-v12-completion-integrity
 ```
 
-Try the practical examples first:
+## Try It in 5 Minutes
+
+Run these examples first, in this order:
+
+| Step | Command | Expected | Lesson |
+| --- | --- | --- | --- |
+| 1 | `python tools/v12_gate.py check examples/block.public_missing_rollback.json` | `BLOCK` | A public or high-impact handoff without rollback/restart handles must not be closed. |
+| 2 | `python tools/v12_gate.py check examples/delay.missing_stop_conditions.json` | `DELAY` | A handoff that lacks stop/recheck conditions is not ready to accept as complete. |
+| 3 | `python tools/v12_gate.py check examples/pass.restartable_local_change.json` | `PASS` | A bounded local change can close when evidence, restart point, stop conditions, and prohibitions are present. |
+
+You can also generate a blank starter record:
 
 ```bash
 python tools/v12_gate.py init > completion_record.json
 python tools/v12_gate.py check completion_record.json
-python tools/v12_gate.py check examples/block.public_missing_rollback.json
-python tools/v12_gate.py check examples/pass.restartable_local_change.json
-python tools/v12_gate.py check examples/delay.missing_stop_conditions.json
 ```
 
-Start with the DELAY and BLOCK examples first; they show what V12 Gate is designed to prevent.
+Start with the DELAY and BLOCK examples first; they show what V12 Gate is designed to prevent. PASS is not the goal; restartable handoff is the goal.
 
-Example map:
+Recommended first examples:
 
 | Example | Purpose | Expected |
 | --- | --- | --- |
