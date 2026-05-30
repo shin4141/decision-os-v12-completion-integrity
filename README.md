@@ -11,6 +11,12 @@ That is where things break.
 The AI says **“done.”**  
 But the next model starts from a broken state.
 
+Sometimes the old chat is overloaded, but switching feels unsafe.
+
+The work may be 98% complete, yet a fresh agent can treat it like 30%.
+
+Without a restartable handoff, the next agent may rebuild or redesign work that was almost finished.
+
 - the assumption is gone
 - the stop condition was never written down
 - the evidence anchor is missing
