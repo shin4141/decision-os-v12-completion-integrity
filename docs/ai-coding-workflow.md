@@ -47,6 +47,16 @@ python tools/v12_gate.py check examples/delay.missing_stop_conditions.json
 python tools/v12_gate.py check examples/block.public_missing_rollback.json
 ```
 
+## Manual Strictness, Not Strict Mode
+
+Strictness can be a human or team rule.
+
+V12 Gate v2.2 does not add a CLI strict mode, scoring system, threshold engine, or policy engine.
+
+For example, a team may decide that missing evidence anchors or stop conditions must remain DELAY or BLOCK before merge.
+
+That rule belongs to the team workflow. The gate still emits only PASS / DELAY / BLOCK.
+
 ## Non-Goals
 
 - V12 Gate is not a code reviewer.

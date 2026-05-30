@@ -70,6 +70,14 @@ python tools/v12_gate.py check .v12/completion_record.json
 
 Use `docs/github-actions-template.md` for a safe check-only workflow template.
 
+## Individual vs Team Use
+
+Solo use: keep a local `.v12/completion_record.json` and check it before accepting an AI coding agent's "done."
+
+Team use: assign a decision owner or reviewer, preserve evidence anchors and stop conditions, and decide by team policy whether DELAY or BLOCK should block merge.
+
+V12 Gate itself does not decide team governance. It records and checks restartability handles so humans and teams can make that choice explicitly.
+
 ## First Local Smoke Test
 
 Before wiring V12 Gate into CI, run one local check that is expected to return DELAY or BLOCK.

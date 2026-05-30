@@ -56,6 +56,18 @@ jobs:
 4. Run the workflow.
 5. Treat DELAY/BLOCK as a signal to finish the record, not as a system failure.
 
+## CI Interpretation
+
+This workflow is check-only.
+
+A green workflow means the Completion Record check passed. It does not mean the code is correct, secure, reviewed, or tested.
+
+DELAY and BLOCK can be intentionally valid records when they preserve integrity by refusing premature closure.
+
+Making this workflow a required check is a repository-owner policy choice.
+
+This template does not add PR comments, write permissions, or `pull_request_target`.
+
 ## Important Boundaries
 
 - This template does not auto-fill records.

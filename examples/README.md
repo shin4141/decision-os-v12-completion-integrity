@@ -12,3 +12,5 @@ Start with these examples when trying V12 Gate for the first time.
 | `conditional_pass_example.json` | `PASS` | Conditional PASS subtype under `PASS`, not a fourth gate output. |
 
 DELAY and BLOCK are valid integrity-preserving outputs. PASS is not a truth guarantee and should not be treated as the goal.
+
+For solo, team, CI, public release, and strict-but-manual adoption examples, see `../docs/adoption-policy-examples.md`.

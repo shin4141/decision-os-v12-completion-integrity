@@ -137,6 +137,9 @@ The artifact focuses on whether a future self can:
 - `docs/install-in-your-repo.md`
   Minimal guide for installing V12 Gate in another repository.
 
+- `docs/adoption-policy-examples.md`
+  Human/team operating policy examples for solo, team, public release, CI, and strict-but-manual use.
+
 - `tools/validate_completion_record.py`  
   A lightweight validator for structure-level checking.
 
@@ -150,6 +153,7 @@ You do not need to read every document before trying V12 Gate.
 - See the failure: `docs/before-after-demo.md`
 - Install in your repo: `docs/install-in-your-repo.md`
 - Give this to your coding agent: `docs/prompt-for-coding-agents.md`
+- Compare adoption styles: `docs/adoption-policy-examples.md`
 - Optional CI check-only setup: `docs/github-actions-template.md`
 
 ---
@@ -181,6 +185,16 @@ python tools/v12_gate.py check completion_record.json
 ```
 
 Start with the DELAY and BLOCK examples first; they show what V12 Gate is designed to prevent. PASS is not the goal; restartable handoff is the goal.
+
+## Adoption Notes
+
+Solo developers can use V12 Gate as a local handoff check before accepting AI "done."
+
+Teams can use it to make review responsibility, evidence, restart points, and stop conditions explicit.
+
+CI can run V12 Gate as a check-only workflow; repository owners decide whether that check is required.
+
+For human/team operating policy examples, see `docs/adoption-policy-examples.md`.
 
 Recommended first examples:
 
