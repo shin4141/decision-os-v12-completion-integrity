@@ -20,7 +20,24 @@ The MVP therefore uses deterministic self-assessment-style heuristics. It checks
 
 ## What The Tool Checks
 
-The tool scores five dimensions from 0 to 5:
+The tool checks whether concrete restart handles are visible in the input:
+
+- what changed
+- what was not touched
+- unresolved items
+- evidence / verification
+- rollback path
+- next step
+- what the next agent must not change
+
+Default output shows:
+
+- Auto-Handoff Stage
+- Missing restart handles
+- Required action
+- Suggested V12 Completion Record draft
+
+The tool keeps internal scoring for deterministic stage selection, but hides scores by default to avoid encouraging score-chasing. Use `--show-scores` or `--verbose` when you need to inspect the internal dimensions:
 
 - `compression_fidelity`
 - `restartability`
@@ -41,6 +58,12 @@ These thresholds are not universal truth. Future versions may allow calibration 
 ```bash
 python tools/auto_handoff_gate.py examples/auto_handoff/long_run_bad.txt
 python tools/auto_handoff_gate.py examples/auto_handoff/long_run_good.txt
+```
+
+To inspect internal scores:
+
+```bash
+python tools/auto_handoff_gate.py --show-scores examples/auto_handoff/long_run_good.txt
 ```
 
 `long_run_bad.txt` is intentionally vague and should return `HANDOFF_NOW` or `PREPARE_HANDOFF`.

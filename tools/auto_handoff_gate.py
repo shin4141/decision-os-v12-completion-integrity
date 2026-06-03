@@ -10,6 +10,7 @@ The thresholds below are initial operational defaults, not universal truth.
 Future versions may allow calibration per model, project, or workflow.
 """
 
+import argparse
 import re
 import sys
 from pathlib import Path
@@ -117,10 +118,6 @@ VAGUE_PATTERNS = [
 ]
 
 
-def usage():
-    print("Usage: python tools/auto_handoff_gate.py <handoff-note.txt>")
-
-
 def count_matches(text, patterns):
     return sum(1 for pattern in patterns if re.search(pattern, text, re.IGNORECASE))
 
@@ -198,6 +195,11 @@ def required_action(stage):
     return "Stop now and write a V12-style Completion Record before continuing."
 
 
+def threshold_note():
+    print("Threshold note: 20-25 => CONTINUE, 14-19 => PREPARE_HANDOFF, 0-13 => HANDOFF_NOW.")
+    print("These thresholds are initial operational defaults, not universal truth.")
+
+
 def print_scores(scores):
     print("| Dimension | Score |")
     print("| --- | ---: |")
@@ -236,11 +238,19 @@ def print_completion_record_draft(handles):
 
 
 def main():
-    if len(sys.argv) != 2:
-        usage()
-        return 1
+    parser = argparse.ArgumentParser(
+        description="Deterministic Auto-Handoff Gate MVP."
+    )
+    parser.add_argument("handoff_note", help="Path to a long-running workflow handoff note.")
+    parser.add_argument(
+        "--show-scores",
+        "--verbose",
+        action="store_true",
+        help="Show internal dimension scores and threshold details.",
+    )
+    args = parser.parse_args()
 
-    path = Path(sys.argv[1])
+    path = Path(args.handoff_note)
     try:
         text = path.read_text(encoding="utf-8")
     except OSError as exc:
@@ -254,13 +264,13 @@ def main():
 
     print(f"# Auto-Handoff Stage: {stage}")
     print()
-    print_scores(scores)
-    print()
-    print(f"**Total score:** {total}/25")
-    print()
-    print("Threshold note: 20-25 => CONTINUE, 14-19 => PREPARE_HANDOFF, 0-13 => HANDOFF_NOW.")
-    print("These thresholds are initial operational defaults, not universal truth.")
-    print()
+    if args.show_scores:
+        print_scores(scores)
+        print()
+        print(f"**Total score:** {total}/25")
+        print()
+        threshold_note()
+        print()
     print("## Missing Restart Handles")
     print()
     print_missing(handles)
