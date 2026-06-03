@@ -1,0 +1,36 @@
+Completion handoff summary:
+
+what_changed:
+- Added the first implementation pass for the auto-handoff gate demo.
+- Updated README links for the demo.
+- Changed files: tools/auto_handoff_gate.py, examples/auto_handoff/README.md.
+
+what_was_not_touched:
+- Did not change completion_record.schema.json.
+- Did not change tools/v12_gate.py or tools/validate_completion_record.py.
+- Did not change GitHub Actions or checklist files.
+
+unresolved_items:
+- Scoring thresholds are initial operational defaults and may need calibration later.
+- This MVP has not been tested against real long-running agent logs.
+
+evidence_anchors:
+- Local diff.
+- Validation command output.
+- Example input files under examples/auto_handoff/.
+
+verification:
+- Ran python tools/auto_handoff_gate.py examples/auto_handoff/long_run_good.txt.
+- Ran python tools/auto_handoff_gate.py examples/auto_handoff/long_run_bad.txt.
+- Existing V12 example validation passed.
+
+rollback:
+- Revert the auto-handoff MVP commit or restore the branch to the previous commit.
+
+next_step:
+- Review whether the heuristics are conservative enough before using this in any workflow.
+
+next_self_should_not:
+- Do not treat this as code correctness validation.
+- Do not add autonomous approval, PR comments, write permissions, or CI/CD replacement behavior.
+- Do not change V12 PASS / DELAY / BLOCK semantics.

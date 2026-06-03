@@ -137,6 +137,9 @@ The artifact focuses on whether a future self can:
 - `docs/auto-handoff-gate-demo.md`
   Static pattern for pausing long-running Codex / agentic workflows before restart handles are lost.
 
+- `examples/auto_handoff/README.md`
+  Deterministic Auto-Handoff Gate MVP for auditing long-running agent handoff notes.
+
 - `docs/install-in-your-repo.md`
   Minimal guide for installing V12 Gate in another repository.
 
