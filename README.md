@@ -30,6 +30,29 @@ That is **False Completion**.
 
 It records what changed, what remains unresolved, what must be preserved, where to restart, when to stop, and what the next AI must not change.
 
+## Why this exists
+
+The real bottleneck of full automation is not whether AI can build.
+
+It is whether the next human, model, or session can understand what the AI changed, what remains unverified, where rollback is possible, and how the work can be safely resumed.
+
+As AI workflows become longer, more autonomous, and more agentic, the main failure mode shifts from "AI cannot do the task" to "nobody can safely continue the task."
+
+**Full automation does not fail only from lack of capability.  
+It fails when work history cannot be handed off, verified, or restarted.**
+
+V12 Auto-Handoff Gate exists to detect that boundary.
+
+It classifies long-running AI work into:
+
+- `CONTINUE`
+- `PREPARE_HANDOFF`
+- `HANDOFF_NOW`
+
+The goal is not to slow agents down.
+
+The goal is to make acceleration survivable.
+
 ## At a Glance
 
 Stop AI from calling unfinished work done.
