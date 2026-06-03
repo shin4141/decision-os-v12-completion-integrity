@@ -134,6 +134,9 @@ The artifact focuses on whether a future self can:
 - `docs/before-after-demo.md`
   Static before/after demo showing how V12 Gate prevents hidden closure.
 
+- `docs/auto-handoff-gate-demo.md`
+  Static pattern for pausing long-running Codex / agentic workflows before restart handles are lost.
+
 - `docs/install-in-your-repo.md`
   Minimal guide for installing V12 Gate in another repository.
 
