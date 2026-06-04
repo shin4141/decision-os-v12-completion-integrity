@@ -316,6 +316,32 @@ Yellow has two sources:
 V12 does not optimize for a score.
 It exposes missing restart handles so the owner can decide.
 
+## Use with Codex / coding agents
+
+To make your coding agent report the V12 Context Signal at the end of each response:
+
+1. Copy this repository's [`AGENTS.md`](AGENTS.md) into the root of your target repository.
+2. Ask your coding agent to follow `AGENTS.md`.
+3. The agent should append a footer like this after each response:
+
+```text
+--- V12 Context Signal ---
+Signal: 🟢 CONTINUE / 🟡 PREPARE_HANDOFF / 🔴 HANDOFF_NOW
+Yellow Stack: [none / N unresolved transitions]
+Context Load: [low / medium / high]
+Changed: ...
+Unverified: ...
+Rollback: ...
+Do-not-touch: ...
+Next safe action: ...
+Owner decision: ...
+```
+
+The footer does not score the work.
+It exposes missing restart handles so the owner can decide whether to continue, prepare handoff, or stop new execution and preserve context.
+
+This is intentionally lightweight: no hooks or automation runtime are required for the first trial.
+
 ---
 
 ## License
