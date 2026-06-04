@@ -7,6 +7,7 @@ Use this format:
 ```text
 --- V12 Context Signal ---
 Signal: 🟢 CONTINUE / 🟡 PREPARE_HANDOFF / 🔴 HANDOFF_NOW
+Yellow Stack: [none / N unresolved transitions]
 Changed: [what was touched or "none"]
 Unverified: [what remains uncertain, untested, or not visually checked]
 Rollback: [available / unclear / missing + short note]
@@ -63,6 +64,26 @@ Use 🔴 when:
 - owner correction signals indicate context drift
 - continuing would likely convert progress into future recovery cost
 
+## Yellow Stack
+
+Yellow Stack means unresolved 🟡 PREPARE_HANDOFF transitions that remain open across responses.
+
+Yellow is not a stop. Yellow is an unresolved transition. The danger is not one yellow; the danger is carrying a stack of unresolved yellow items into execution.
+
+A single yellow item does not necessarily require stopping. However, if multiple yellow items accumulate and the agent proceeds into new implementation, the risk of context drift, false completion, or wrong-task continuation increases.
+
+The agent must not collapse multiple yellow items into a vague summary. List each unresolved yellow item separately.
+
+For each Yellow Stack item, include:
+
+- item
+- status: proposed / accepted / rejected / pending
+- reason
+- required closure
+- owner decision needed: yes / no
+
+If Yellow Stack is non-empty, include it in the V12 Context Signal Footer.
+
 ## Risk Driver Rule
 
 When outputting 🟡 or 🔴, explain the risk driver by mapping the weakened handle to its likely failure mode.
@@ -75,6 +96,9 @@ Examples:
 - Do-not-touch weak -> future agent may violate owner intent or a preserved constraint.
 - Next safe action ambiguous -> the next step may branch into the wrong task.
 - Owner intent unclear -> the agent may fill gaps with its own assumptions.
+- Rejected option not closed -> future agent may revive a rejected path.
+- Pending alternatives unresolved -> future agent may treat a proposal as accepted.
+- Multiple yellow items carried into execution -> future handoff may mix unrelated decisions.
 
 Allowed language:
 
@@ -90,6 +114,19 @@ Avoid language that implies forced stopping, guarantees, or numeric scoring.
 ```text
 --- V12 Context Signal ---
 Signal: 🟡 PREPARE_HANDOFF
+Yellow Stack: 2 unresolved transitions
+Changed: none
+Unverified: no files changed, but decision state changed
+Rollback: available; no files were modified
+Do-not-touch: Option A remains rejected; do not reframe V12 as a generic safety tool
+Next safe action: close one yellow item or write a short decision handoff before new edits
+Owner decision: recommended
+```
+
+```text
+--- V12 Context Signal ---
+Signal: 🟡 PREPARE_HANDOFF
+Yellow Stack: none
 Changed: README.md and examples/auto_handoff/vibe_coding_bad_to_good.md
 Unverified: GitHub rendered README view has not been visually checked
 Rollback: available via latest commit
