@@ -89,6 +89,10 @@ If Yellow Stack is non-empty, include it in the V12 Context Signal Footer.
 
 Context Load means the accumulated burden of long-running work even when Yellow Stack items are closed.
 
+Context Load levels are default operational guidance. The Decision Owner may override or calibrate when low, medium, or high begins for a specific workflow.
+
+Context Load is not a universal length threshold. It is owner-calibrated according to workflow impact, reversibility, restart cost, and speed value.
+
 Yellow Stack can be reduced by closing unresolved transitions. Context Load is reduced by writing a handoff, compressing the current state, moving to a fresh session, or anchoring the current state in a commit, release, or decision record.
 
 Use Context Load: low when:
