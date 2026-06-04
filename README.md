@@ -298,6 +298,24 @@ Completion Integrity protects the self-recursive pipeline.
 
 This repository is designed to support the latter.
 
+## V12 Context Signal
+
+V12 also supports a Context Signal for long-running AI work:
+
+- 🟢 `CONTINUE`
+- 🟡 `PREPARE_HANDOFF`
+- 🔴 `HANDOFF_NOW`
+
+The key state is yellow: the work has not failed, but continuing without preservation is becoming more expensive.
+
+Yellow has two sources:
+
+- **Yellow Stack**: unresolved transitions, pending choices, rejected options, or owner decisions that must not be collapsed into a vague summary.
+- **Context Load**: accumulated context aging from long-running work, even when open yellow items have been closed.
+
+V12 does not optimize for a score.
+It exposes missing restart handles so the owner can decide.
+
 ---
 
 ## License
