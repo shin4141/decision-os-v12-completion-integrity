@@ -8,6 +8,7 @@ Use this format:
 --- V12 Context Signal ---
 Signal: 🟢 CONTINUE / 🟡 PREPARE_HANDOFF / 🔴 HANDOFF_NOW
 Yellow Stack: [none / N unresolved transitions]
+Context Load: [low / medium / high]
 Changed: [what was touched or "none"]
 Unverified: [what remains uncertain, untested, or not visually checked]
 Rollback: [available / unclear / missing + short note]
@@ -84,6 +85,38 @@ For each Yellow Stack item, include:
 
 If Yellow Stack is non-empty, include it in the V12 Context Signal Footer.
 
+## Context Load
+
+Context Load means the accumulated burden of long-running work even when Yellow Stack items are closed.
+
+Yellow Stack can be reduced by closing unresolved transitions. Context Load is reduced by writing a handoff, compressing the current state, moving to a fresh session, or anchoring the current state in a commit, release, or decision record.
+
+Use Context Load: low when:
+
+- the current task is short and locally restartable
+- few decisions or pivots have occurred
+- the next safe action is obvious
+
+Use Context Load: medium when:
+
+- several decisions, pivots, commits, or framing changes have accumulated
+- the work is still coherent, but future restart would require rereading several sections
+- a short handoff would be cheap now and expensive later
+
+Use Context Load: high when:
+
+- the session/thread/workflow has become long enough that future restart depends on implicit memory
+- many completed decisions must be preserved to avoid regression
+- a new agent could confuse older framing with the current framing
+- a fresh handoff or session move is recommended before new implementation
+
+There are two kinds of yellow:
+
+- Yellow Stack: unresolved-transition yellow
+- Context Load: context-aging yellow
+
+The main Signal is the highest active concern across Yellow Stack, Context Load, and restartability handles.
+
 ## Risk Driver Rule
 
 When outputting 🟡 or 🔴, explain the risk driver by mapping the weakened handle to its likely failure mode.
@@ -115,6 +148,7 @@ Avoid language that implies forced stopping, guarantees, or numeric scoring.
 --- V12 Context Signal ---
 Signal: 🟡 PREPARE_HANDOFF
 Yellow Stack: 2 unresolved transitions
+Context Load: low
 Changed: none
 Unverified: no files changed, but decision state changed
 Rollback: available; no files were modified
@@ -127,6 +161,7 @@ Owner decision: recommended
 --- V12 Context Signal ---
 Signal: 🟡 PREPARE_HANDOFF
 Yellow Stack: none
+Context Load: high
 Changed: README.md and examples/auto_handoff/vibe_coding_bad_to_good.md
 Unverified: GitHub rendered README view has not been visually checked
 Rollback: available via latest commit
