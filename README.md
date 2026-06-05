@@ -2,20 +2,15 @@
 
 # Decision-OS V12: Completion Integrity
 
-**Stop your AI from calling broken handoffs “done.”**
+**Stop paying the same context cost twice.**
 
-AI-assisted work is moving across Claude Code, Codex, ChatGPT, Gemini, Grok, and long-running sessions.
+If you keep explaining the same project state to Claude Code, Codex, or another coding agent, that is not just token cost. It is a broken handoff.
 
-That is where things break.
+Long-running AI work becomes expensive when the next human, model, or session must reread, revalidate, rerun, or rediscover what the previous agent already did.
 
-The AI says **“done.”**  
-But the next model starts from a broken state.
+V12 helps make that cost visible before the agent calls the work **"done."**
 
-Sometimes the old chat is overloaded, but switching feels unsafe.
-
-The work may be 98% complete, yet a fresh agent can treat it like 30%.
-
-Without a restartable handoff, the next agent may rebuild or redesign work that was almost finished.
+That failure mode is **False Completion**: the work appears complete, but the next agent cannot safely restart because changed files, unverified work, rollback points, do-not-touch assumptions, or next safe actions are missing.
 
 - the assumption is gone
 - the stop condition was never written down
@@ -23,8 +18,6 @@ Without a restartable handoff, the next agent may rebuild or redesign work that 
 - the file or interface that must not change gets changed
 - the next session cannot tell what was unresolved
 - the user has to reconstruct the work from memory
-
-That is **False Completion**.
 
 **Completion Integrity** is a minimal protocol for preventing that failure.
 
