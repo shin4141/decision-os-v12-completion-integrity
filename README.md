@@ -48,7 +48,7 @@ The goal is to make acceleration survivable.
 
 ## Quick Start: Copy-paste short version
 
-If you do not want to read the full repo first, paste this short AGENTS.md into your AI coding project:
+If you do not want to read the full repo first, paste this short AGENTS.md into your Codex / Claude Code / Cursor / agent project:
 
 - [V12 Short AGENTS.md](docs/v12-short-agents.md)
 
