@@ -46,6 +46,15 @@ The goal is not to slow agents down.
 
 The goal is to make acceleration survivable.
 
+## Quick Start: Copy-paste short version
+
+If you do not want to read the full repo first, paste this short AGENTS.md into your AI coding project:
+
+- [V12 Short AGENTS.md](docs/v12-short-agents.md)
+
+This reduces token cost and gives the agent the minimum completion discipline:
+do not call work done unless the next human/agent can resume, verify, roll back, and continue safely.
+
 ## At a Glance
 
 Stop AI from calling unfinished work done.
