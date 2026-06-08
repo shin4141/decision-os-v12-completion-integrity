@@ -1,4 +1,6 @@
-![Validate Completion Records](https://github.com/shin4141/decision-os-v12-completion-integrity/actions/workflows/validate.yml/badge.svg)
+[![Latest Release](https://img.shields.io/github/v/release/shin4141/decision-os-v12-completion-integrity?sort=semver&display_name=tag)](https://github.com/shin4141/decision-os-v12-completion-integrity/releases/latest)
+[![License](https://img.shields.io/github/license/shin4141/decision-os-v12-completion-integrity)](LICENSE)
+[![Validate Completion Records](https://github.com/shin4141/decision-os-v12-completion-integrity/actions/workflows/validate.yml/badge.svg)](https://github.com/shin4141/decision-os-v12-completion-integrity/actions/workflows/validate.yml)
 
 # Decision-OS V12: Completion Integrity
 
