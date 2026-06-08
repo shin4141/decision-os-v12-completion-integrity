@@ -6,6 +6,12 @@
 
 **Stop paying the same context cost twice.**
 
+## TL;DR
+
+1. Copy `docs/v12-short-agents.md` into your repo root as `AGENTS.md`.
+2. Run Claude Code, Codex, Cursor, or another coding agent normally.
+3. Do not accept `done` until the V12 footer shows Changed, Unverified, Rollback, Do-not-touch, and Next safe action.
+
 This repository is for Claude Code / Codex / Cursor / agentic coding workflows that need completion and handoff discipline.
 
 If you keep explaining the same project state to Claude Code, Codex, or another coding agent, that is not just token cost. It is a broken handoff.
