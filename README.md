@@ -6,24 +6,50 @@
 
 **Stop paying the same context cost twice.**
 
+This repository is for Claude Code / Codex / Cursor / agentic coding workflows that need completion and handoff discipline.
+
 If you keep explaining the same project state to Claude Code, Codex, or another coding agent, that is not just token cost. It is a broken handoff.
 
 Long-running AI work becomes expensive when the next human, model, or session must reread, revalidate, rerun, or rediscover what the previous agent already did.
 
 V12 helps make that cost visible before the agent calls the work **"done."**
 
-That failure mode is **False Completion**: the work appears complete, but the next agent cannot safely restart because changed files, unverified work, rollback points, do-not-touch assumptions, or next safe actions are missing.
+It asks agents to report the restart handles that make work resumable: Changed, Unverified, Rollback, Do-not-touch, and Next safe action.
 
-- the assumption is gone
-- the stop condition was never written down
-- the evidence anchor is missing
-- the file or interface that must not change gets changed
-- the next session cannot tell what was unresolved
-- the user has to reconstruct the work from memory
+That failure mode is **False Completion**: the work appears complete, but the next agent cannot safely restart because changed files, unverified work, rollback points, do-not-touch assumptions, or next safe actions are missing.
 
 **Completion Integrity** is a minimal protocol for preventing that failure.
 
 It records what changed, what remains unresolved, what must be preserved, where to restart, when to stop, and what the next AI must not change.
+
+## Quick Start: Copy-paste short version
+
+If you do not want to read the full repo first, start with the short AGENTS.md:
+
+1. Copy [`docs/v12-short-agents.md`](docs/v12-short-agents.md) into your repo root as `AGENTS.md`.
+2. Run Claude Code / Codex / Cursor / your coding agent normally.
+3. Require the V12 Context Signal footer before treating work as complete.
+
+This reduces token cost and gives the agent the minimum completion discipline:
+do not call work done unless the next human/agent can resume, verify, roll back, and continue safely.
+
+## Before / After
+
+Before:
+
+- Agent says done.
+- Changed files are unclear.
+- Unverified work is hidden.
+- Rollback point is missing.
+- Next session must reconstruct context.
+
+After:
+
+- Changed is listed.
+- Unverified is explicit.
+- Rollback is named.
+- Do-not-touch is preserved.
+- Next safe action is clear.
 
 ## Why this exists
 
@@ -47,15 +73,6 @@ It classifies long-running AI work into:
 The goal is not to slow agents down.
 
 The goal is to make acceleration survivable.
-
-## Quick Start: Copy-paste short version
-
-If you do not want to read the full repo first, paste this short AGENTS.md into your Codex / Claude Code / Cursor / agent project:
-
-- [V12 Short AGENTS.md](docs/v12-short-agents.md)
-
-This reduces token cost and gives the agent the minimum completion discipline:
-do not call work done unless the next human/agent can resume, verify, roll back, and continue safely.
 
 ## At a Glance
 
