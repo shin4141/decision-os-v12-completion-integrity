@@ -4,7 +4,17 @@
 
 # Decision-OS V12: Completion Integrity
 
-**Stop paying the same context cost twice.**
+**Good completion reduces future AI cost.**
+
+Bad `done` reports make the next AI run spend tokens recovering context.
+
+Bad handoff makes stronger models do cleanup work.
+
+Before paying for a stronger model, improve completion quality and restartability.
+
+Decision-OS V12 is a completion-integrity kit for AI coding workflows.
+
+It checks whether work is actually complete, evidenced, and restartable before an agent calls it done.
 
 ## TL;DR
 
@@ -14,9 +24,7 @@
 
 This repository is for Claude Code / Codex / Cursor / agentic coding workflows that need completion and handoff discipline.
 
-If you keep explaining the same project state to Claude Code, Codex, or another coding agent, that is not just token cost. It is a broken handoff.
-
-Long-running AI work becomes expensive when the next human, model, or session must reread, revalidate, rerun, or rediscover what the previous agent already did.
+If you keep explaining the same project state to Claude Code, Codex, or another coding agent, that is not just token cost. It is a broken completion record.
 
 V12 helps make that cost visible before the agent calls the work **"done."**
 
