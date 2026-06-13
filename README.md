@@ -223,6 +223,8 @@ git clone https://github.com/shin4141/decision-os-v12-completion-integrity.git
 cd decision-os-v12-completion-integrity
 ```
 
+No package install is required for the local examples below.
+
 ## Try It in 5 Minutes
 
 Run these examples first, in this order:
