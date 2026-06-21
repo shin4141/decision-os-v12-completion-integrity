@@ -32,6 +32,14 @@ It asks agents to report the restart handles that make work resumable: Changed, 
 
 That failure mode is **False Completion**: the work appears complete, but the next agent cannot safely restart because changed files, unverified work, rollback points, do-not-touch assumptions, or next safe actions are missing.
 
+## Restartability debt
+
+False Completion is also a responsibility transfer: an AI reply looks complete locally, but leaves the future user or next AI session to recover the restartability context.
+
+A human would not go to sleep after deleting a GitHub repo, notes, working drafts, or task history, because tomorrow they would inherit the damage. An AI session often does not carry that responsibility into tomorrow, so it can accidentally pass unresolved assumptions, unverified items, missing source-of-truth references, or the real reason the user was stuck to the next session.
+
+Local correctness is not enough. The assistant must close work in a restartable form, with enough context for the next human, model, or session to verify, roll back, and continue without rediscovering the work.
+
 **Completion Integrity** is a minimal protocol for preventing that failure.
 
 It records what changed, what remains unresolved, what must be preserved, where to restart, when to stop, and what the next AI must not change.
